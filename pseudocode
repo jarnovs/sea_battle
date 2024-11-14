@@ -1,0 +1,66 @@
+Field = 
+0 1 2 3 4 5 6 7
+A ▢▧▢▢▢▧▢▢
+B ▢▢▢▣▢▢▢◆
+C ▢▢▢▣▢▢▢▢
+D ▧▢▢▣▢▢▣◆
+E ▢◆◆▢▢▢▢▢
+F ▢▢▢◆◆◆▢◆
+G ▧▧▢▢▢▢▧▢
+
+Signs =
+▢ - empty square
+▧ - sunk
+▣ - hit
+◆ - miss
+
+
+def clear()
+    clearing
+
+clear console
+read name
+
+def field()
+    1) generating ships
+    1 = 3 square
+    2 = 2 square
+    4 = 1 square
+    (dont touch each other even at corners)
+
+def game()
+    clear console
+    print field
+    read coordinates
+    shots = 0
+        if the cell is available and not have been shoot before:
+            if ship in coordinates:
+                if ship destroyed:
+                    mark all that ship as sunk
+                    shots += 1
+                    if no ship left:
+                        return amount of shots
+                    else:
+                        game()
+                else:
+                    mark hit
+                    shots += 1
+                    game()
+            else:
+                mark miss
+                shots += 1
+                game()
+        else:
+            print wrong cell, enter coordinates again
+            game()
+
+field()
+game()
+
+print amount of shots
+if new game:
+    field()
+    game()
+else:
+    save player
+    print all players
