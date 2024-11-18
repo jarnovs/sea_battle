@@ -1,7 +1,6 @@
 import os
 
 shots = 0
-#name = input('Enter your name: ')
 
 # Function for clearing the window
 def clear():
@@ -112,6 +111,15 @@ def game():
     coordinates = input('Enter coordinates as (A;1): ')
     cell_availabe(coordinates)
 
-print_field()
+clear()
+print(preview)
+name=input('Welcome to the Sea Battle! Please enter your name: ')
+print(instruction)
+input('Press any key after reading instruction above')
 game()
 
+choice = 'Do you want to start new game? (Yes/No): '
+if 'Yes':
+    game
+else:
+    pass
