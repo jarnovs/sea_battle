@@ -8,7 +8,7 @@ def clear():
 
 # Generating field and ships
 field = [['▢' for j in range(7)] for i in range(7)]
-ship_coordinates = [['C;4','D;4','E;4'], ['G;1', 'G;2'], ['C;6', 'D;6'], ['A;2'], ['A;5'], ['D;1'], ['G;6']]
+ship_coordinates = [['G;6']]
 
 preview = '''
    _____               ____        __  __  __        __
@@ -65,6 +65,7 @@ def if_no_ship_left():
         print(preview)
         print_field()
         print('Congratulation! You have found all ships and made:', shots, 'shots.')
+        return shots
     else:
         game()
 
@@ -118,8 +119,10 @@ print(instruction)
 input('Press any key after reading instruction above')
 game()
 
-choice = 'Do you want to start a new game? (Yes/No): '
+choice = input('Do you want to start a new game? (Yes/No): ')
 if choice == 'Yes':
-    game()
+    #generate_field()
+    #game()
+    print('/')
 else:
     pass
