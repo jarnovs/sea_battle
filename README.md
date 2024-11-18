@@ -1,5 +1,5 @@
 # sea_battle
 - [ ] Ships Generator
-- [ ] Marking Ships
+- [x] Marking Ships
 - [ ] Player Database
-- [x] W
+
