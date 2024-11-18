@@ -118,8 +118,8 @@ print(instruction)
 input('Press any key after reading instruction above')
 game()
 
-choice = 'Do you want to start new game? (Yes/No): '
-if 'Yes':
-    game
+choice = 'Do you want to start a new game? (Yes/No): '
+if choice == 'Yes':
+    game()
 else:
     pass
