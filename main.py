@@ -1,47 +1,25 @@
+import os
+
+shots = 0
+#name = input('Enter your name: ')
+
+# Function for clearing the window
+def clear():
+    os.system('cls' if os.name=='nt' else 'clear')
+
+# Generating field and ships
 field = [['▢' for j in range(7)] for i in range(7)]
-ship_coordinates = [['A;0','A;0','A;0'], ['B;1', 'B;1'], ['B;2', 'B;2'], ['C;1'], ['C;2'], ['C;3'], ['C;4']]
+ship_coordinates = [['C;4','D;4','E;4'], ['G;1', 'G;2'], ['C;6', 'D;6'], ['A;2'], ['A;5'], ['D;1'], ['G;6']]
 
+#0|1|2|3|4|5|6|7
+#A ▢▧▢▢▧▢▢
+#B ▢▢▢▢▢▢▢
+#C ▢▢▢▧▢▧▢
+#D ▧▢▢▧▢▧▢
+#E ▢▢▢▧▢▢▢
+#F ▢▢▢▢▢▢▢
+#G ▧▧▢▢▢▧▢
 
-#####
-from random import randint
-
-def gencoordinates(m, n):
-    seen = set()
-    x, y = randint(m, n), randint(m, n)
-    while True:
-        seen.add((x, y))
-        yield (x, y)
-        x, y = randint(m, n), randint(m, n)
-        while (x, y) in seen:
-            x, y = randint(m, n), randint(m, n)
-
-coords=[]
-for i in range(4):
-    coords.append(next(gencoordinates(1, 7 )))
-print(coords)
-
-for i in range(3):
-    for j in range(i+1,4):
-        if abs(coords[i][0] - coords[j][0]) <= 1 and abs(coords[i][1] - coords[j][1]) <= 1:
-            print('YES')
-            print(coords[i], coords[j])
-            while True:
-                coords[j] = next(gencoordinates(1, 7 ))
-                if abs(coords[i][0] - coords[j][0]) <= 1 and abs(coords[i][1] - coords[j][1]) <= 1:
-                    continue
-                else:
-                    break
-        else:
-            pass
-
-print(coords)
-for coord in coords:
-    field[coord[0]-1][coord[1]-1] = '▧'
-
-
-
-
-#####
 preview = '''
    _____               ____        __  __  __        __
   / ___/___  ____ _   / __ )____ _/ /_/ /_/ /__     / /
@@ -57,18 +35,82 @@ instruction = '''
 ◆ - miss
 '''
 
-columns = ['0','1','2','3','4','5','6','7',]
-rows = ['A','B','C','D','E','F','G']
+def print_field():
+    columns = ['0','1','2','3','4','5','6','7',]
+    rows = ['A','B','C','D','E','F','G']
+    print('|'.join(columns), sep='\n')
+    for i in range(7):
+        print(rows[i],''.join(field[i]))
 
-print('|'.join(columns), sep='\n')
-for i in range(7):
-    print(rows[i],''.join(field[i]))
-print()
-input('Enter coordinates (e.g. A;4): ')
+#transform coordinates (A;5) to matrix numbers (0;4)
+def transform(coordinates):
+    coords = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, }
+    row, column = coordinates.split(';')
+    return([coords[row], int(column)-1])
+
+#marks coordinates
+def hit(coordinates):
+    global field
+    row, column = transform(coordinates)
+    field[row][column] = '▣'
+
+def miss(coordinates):
+    global field
+    row, column = transform(coordinates)
+    field[row][column] = '◆'
+
+def sunk(ship):
+    global field
+    for coordinate in ship:
+        row, column = transform(coordinate)
+        field[row][column] = '▧'
 
 
 
+def if_ship_destroyed(coordinates):
+    global ship_coordinates
+    ship = [ship for ship in ship_coordinates if coordinates in ship][0]
+    coordinates = [field[transform(coordinate)[0]][transform(coordinate)[1]] for coordinate in ship]
+    if coordinates == ['▣']*len(ship):
+        sunk(ship)
+        #if_no_ship_left()
+    else:
+        game()
 
+def ship_in_coordinates(coordinates):
+    global shots
+    if any(coordinates in ship for ship in ship_coordinates):
+        hit(coordinates)
+        shots+=1
+        if_ship_destroyed(coordinates)
+    else:
+        miss(coordinates)
+        shots+=1
+        game()
 
+def cell_availabe(coordinates):
+    row, column = coordinates.split(';')
+    if row in 'ABCDEFG' and column in '1234567':
+        row, column = transform(coordinates)
+        if field[row][column] == '▢':
+            ship_in_coordinates(coordinates)
+        else:
+            print('Cell have been already shot. Please enter coordinates again')
+            input('Press to continue')
+            game()
+    else:
+        print('Cell out of field. Please enter coordinates again')
+        input('Press to continue')
+        game()
 
-print(field)
+def game():
+    clear()
+    print_field()
+    coordinates = input('Enter coordinates as (A;1): ')
+    cell_availabe(coordinates)
+
+print_field()
+#game()
+
+def if_no_ship_left():
+    pass
