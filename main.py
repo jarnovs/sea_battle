@@ -56,16 +56,10 @@ def sunk(ship):
         field[row][column] = '▧'
 
 def if_no_ship_left():
-    global shots
     all_ships = [coordinate for ship in ship_coordinates for coordinate in ship]
     coordinates = [field[transform(coordinate)[0]][transform(coordinate)[1]] for coordinate in all_ships]
-
     if coordinates == ['▧']*len(all_ships):
         clear()
-        print(preview)
-        print_field()
-        print('Congratulation! You have found all ships and made:', shots, 'shots.')
-        return shots
     else:
         game()
 
@@ -90,19 +84,18 @@ def ship_in_coordinates(coordinates):
         shots+=1
         game()
 
-def cell_availabe(coordinates):
-    row, column = coordinates.split(';')
-    if row in 'ABCDEFG' and column in '1234567':
+def cell_available(coordinates):
+    try:
         row, column = transform(coordinates)
         if field[row][column] == '▢':
             ship_in_coordinates(coordinates)
         else:
             print('Cell have been already shot. Please enter coordinates again')
-            input('Press to continue')
+            input('Press any key to continue')
             game()
-    else:
+    except:
         print('Cell out of field. Please enter coordinates again')
-        input('Press to continue')
+        input('Press any key to continue')
         game()
 
 def game():
@@ -110,8 +103,9 @@ def game():
     print(preview)
     print_field()
     coordinates = input('Enter coordinates as (A;1): ')
-    cell_availabe(coordinates)
+    cell_available(coordinates)
 
+# Starting
 clear()
 print(preview)
 name=input('Welcome to the Sea Battle! Please enter your name: ')
@@ -119,10 +113,16 @@ print(instruction)
 input('Press any key after reading instruction above')
 game()
 
+# Ending
+clear()
+print(preview)
+print_field()
+print('Congratulation! You have found all ships and made:', shots, 'shots.')
+
 choice = input('Do you want to start a new game? (Yes/No): ')
 if choice == 'Yes':
     #generate_field()
     #game()
     print('/')
 else:
-    pass
+    print('/')
