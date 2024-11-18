@@ -11,15 +11,6 @@ def clear():
 field = [['▢' for j in range(7)] for i in range(7)]
 ship_coordinates = [['C;4','D;4','E;4'], ['G;1', 'G;2'], ['C;6', 'D;6'], ['A;2'], ['A;5'], ['D;1'], ['G;6']]
 
-#0|1|2|3|4|5|6|7
-#A ▢▧▢▢▧▢▢
-#B ▢▢▢▢▢▢▢
-#C ▢▢▢▧▢▧▢
-#D ▧▢▢▧▢▧▢
-#E ▢▢▢▧▢▢▢
-#F ▢▢▢▢▢▢▢
-#G ▧▧▢▢▢▧▢
-
 preview = '''
    _____               ____        __  __  __        __
   / ___/___  ____ _   / __ )____ _/ /_/ /_/ /__     / /
@@ -65,15 +56,26 @@ def sunk(ship):
         row, column = transform(coordinate)
         field[row][column] = '▧'
 
+def if_no_ship_left():
+    global shots
+    all_ships = [coordinate for ship in ship_coordinates for coordinate in ship]
+    coordinates = [field[transform(coordinate)[0]][transform(coordinate)[1]] for coordinate in all_ships]
 
+    if coordinates == ['▧']*len(all_ships):
+        clear()
+        print(preview)
+        print_field()
+        print('Congratulation! You have found all ships and made:', shots, 'shots.')
+    else:
+        game()
 
 def if_ship_destroyed(coordinates):
     global ship_coordinates
     ship = [ship for ship in ship_coordinates if coordinates in ship][0]
-    coordinates = [field[transform(coordinate)[0]][transform(coordinate)[1]] for coordinate in ship]
-    if coordinates == ['▣']*len(ship):
+    ship_cells = [field[transform(coordinate)[0]][transform(coordinate)[1]] for coordinate in ship]
+    if ship_cells == ['▣']*len(ship):
         sunk(ship)
-        #if_no_ship_left()
+        if_no_ship_left()
     else:
         game()
 
@@ -105,12 +107,11 @@ def cell_availabe(coordinates):
 
 def game():
     clear()
+    print(preview)
     print_field()
     coordinates = input('Enter coordinates as (A;1): ')
     cell_availabe(coordinates)
 
 print_field()
-#game()
+game()
 
-def if_no_ship_left():
-    pass
