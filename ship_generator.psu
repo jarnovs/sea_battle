@@ -1,0 +1,58 @@
+ship_coords = [[[3, 5]], [[2, 1]], [[1, 4]], [[0, 2]]]
+
+#generate 1x1
+craete random_coord
+add in ship_coords
+
+- repeat 4 times -
+create random_coord
+check if its touching something
+    if yes:
+        all again
+    else:
+        add in ship_coords
+
+
+#generate 2x1
+- repeat 2 times -
+create random_coord
+check if its touching something:
+    if yes:
+        all again
+    else:
+        create coord -1 or +1 in x or y
+        check if square is possible
+            if not:
+                all again
+            else:
+                check if coord is not touching
+                    if touch:
+                         all again
+                    else:
+                        add both coords in ship_coords
+                    
+# generate 3x1
+create random_coord
+check if its touching something:
+    if yes:
+        all again
+    else:
+        create coord -1 or +1 in x or y 
+        check if square is possible:
+            if not:
+                all again
+            else:
+                check if coord is not touching
+                    if touch:
+                        all again
+                    else:
+                        create coord with same direction as previous
+                        check if square is possible
+                            if not:
+                                all again
+                            else:
+                                check if coord is not touching
+                                    if touch:
+                                        all again
+                                    else:
+                                        add three coord in ship_coords
