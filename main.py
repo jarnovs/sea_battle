@@ -25,6 +25,28 @@ instruction = '''
 ◆ - miss
 '''
 
+# Storing record of player
+def store_record(name,score):
+    with open("records.txt", 'a') as file:
+        file.write(str(name) + ';' + str(score) + '\n')
+        file.close()
+
+# Printing scoreboard of top players
+def scoreboard():
+    with open("records.txt") as file:
+        player_list = []
+
+        for line in file:
+            data = line.rstrip()
+            name, score = data.split(';')
+            player_list.append((int(score), name))
+
+        player_list = sorted(player_list)
+        print('--- TOP PLAYERS ---')
+        for player in player_list:
+            print(player[1], '-', player[0])
+        file.close()
+
 def print_field():
     columns = ['0','1','2','3','4','5','6','7',]
     rows = ['A','B','C','D','E','F','G']
@@ -125,4 +147,5 @@ if choice == 'Yes':
     #game()
     print('/')
 else:
-    print('/')
+    store_record(name,shots)
+    scoreboard()
