@@ -1,0 +1,6 @@
+Sanjar;20
+Player1;30
+Player2;49
+Player3;49
+Player4;21
+Player5;23
