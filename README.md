@@ -2,4 +2,4 @@
 - [x] Pseudocode
 - [x] Marking Ships Functions
 - [x] Player Database
-- [ ] Ships Random Generator
+- [x] Ships Random Generator
