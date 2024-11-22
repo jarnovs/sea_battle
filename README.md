@@ -4,5 +4,8 @@
 - [x] Player Database
 - [x] Ships Random Generator
 
-## Game Menu:
+## Game Play:
 ![alt text](https://github.com/jarnovs/sea_battle/blob/main/custom/sea_battle.png?raw=true)
+
+## Score Board:
+![alt text](https://github.com/jarnovs/sea_battle/blob/main/custom/Scoreboard.png?raw=true)
