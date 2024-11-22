@@ -1,11 +1,14 @@
 import random
 
 ships = []
-
 freezone = set()
-for i in range(7):
-    for j in range(7):
-        freezone.add((i,j))
+
+def create_freezone():
+    global freezone
+    freezone = set()
+    for i in range(7):
+        for j in range(7):
+            freezone.add((i,j))
 
 def random_direction():
     direction = random.randint(0,1)
@@ -90,6 +93,7 @@ def last_one_ship():
     global freezone
     if len(freezone) == 0:
         ship = []
+        create_freezone()
         big_ship()
         medium_ship()
         medium_ship()
@@ -105,6 +109,7 @@ def last_one_ship():
 def field_generation():
     global ships
     ships = []
+    create_freezone()
     big_ship()
     medium_ship()
     medium_ship()
@@ -112,6 +117,7 @@ def field_generation():
     one_ship()
     one_ship()
     last_one_ship()
+    ship_coordinates = [[transform(coordinate) for coordinate in ship] for ship in ships]
+    return ship_coordinates
 
 field_generation()
-ship_coordinates = [[transform(coordinate) for coordinate in ship] for ship in ships]
