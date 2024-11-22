@@ -1,6 +1,8 @@
 import os
+from ship_generator import field_generation
 
 shots = 0
+ship_coordinates = field_generation()
 
 # Function for clearing the window
 def clear():
@@ -8,7 +10,6 @@ def clear():
 
 # Generating field and ships
 field = [['▢' for j in range(7)] for i in range(7)]
-ship_coordinates = [['G;6']]
 
 preview = '''
    _____               ____        __  __  __        __
@@ -136,16 +137,23 @@ input('Press any key after reading instruction above')
 game()
 
 # Ending
-clear()
-print(preview)
-print_field()
-print('Congratulation! You have found all ships and made:', shots, 'shots.')
+def ending():
+    global preview
+    global shots
+    clear()
+    print(preview)
+    print_field()
+    print('Congratulation! You have found all ships and made:', shots, 'shots.')
 
+ending()
 choice = input('Do you want to start a new game? (Yes/No): ')
-if choice == 'Yes':
-    #generate_field()
-    #game()
-    print('/')
+
+while choice == 'Yes':
+    ship_coordinates = field_generation()
+    field = [['▢' for j in range(7)] for i in range(7)]
+    game()
+    ending()
+    choice = input('Do you want to start a new game? (Yes/No): ')
 else:
     store_record(name,shots)
     scoreboard()
