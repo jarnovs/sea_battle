@@ -1,49 +1,60 @@
 # Todorite
 
-![Todorite Logo](custom/logo.png) <!-- Если есть логотип -->
+<img src="img/logo.jpg" width="300">
 
-## Backend Todorite
+![alt text](custom/authorization.jpg)
 
-Backend написан на **Koa**, работает под управлением **PM2**.  
+![alt text](custom/chat.jpg)
+
+## О проекте
+
+**Todorite** — Web Messenger.  
+Backend написан на **Koa**, работает под управлением **PM2**,  
+Frontend реализован с помощью **React** и **Vite**.
 
 ## Технологии
 
 - **Backend:** Node.js, Koa, PM2
+- **Frontend:** React, Vite
 - **Сервер:** Nginx
 - **SSL:** Let's Encrypt (для HTTPS)
 
 ## Функциональность
 
 - Регистрация и аутентификация пользователей
-- Проверка токена
-- Поддержка REST API
-- Валидация по Joi
-- MVC разделение
+- Поддержка REST API для взаимодействия между клиентом и сервером
+- Клиентская маршрутизация (страницы `/login`, `/register`, `/app` и т.д.)
 
-## Структура
-
-backend/
-├── src/
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   └── userController.js
-│   ├── middleware/
-│   │   ├── authChecker.js
-│   │   ├── errorHandler.js
-│   │   └── logger.js
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── chatRoutes.js
-│   │   ├── infoRoutes.js
-│   │   └── userRoutes.js
-│   ├── services/
-│   │   ├── authServices.js
-│   │   ├── chatServices.js
-│   │   ├── infoServices.js
-│   │   └── userServices.js
-│   ├── utils/
-│   │   ├── config.js
-│   │   └── knex.js
-├── index.js
-package.json
-package-lock.json
+## Структура проекта
+```
+todorite/
+├── backend/
+│   └── ...              (код серверной части)
+├── frontend/
+│   ├── public/
+│   │   ├── img/
+│   │   └── user_logos/
+│   ├── src/
+│   │   ├── LogAndReg/
+│   │   │   ├── components/
+│   │   │   ├── General.css
+│   │   │   ├── Login.jsx
+│   │   │   └── Register.jsx
+│   │   ├── components/
+│   │   │   ├── LeftContainer/
+│   │   │   └── RightContainer/
+│   │   ├── services/
+│   │   │   ├── useChat.jsx
+│   │   │   ├── useMessages.jsx
+│   │   │   ├── useUser.jsx
+│   │   │   └── useUsers.jsx
+│   │   ├── utils/
+│   │   │   └── getCookie.jsx
+│   │   ├── Chat.jsx
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── ...
+│   ├── index.html
+│   ├── package.json
+│   └── ...
+```
