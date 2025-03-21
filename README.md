@@ -1,16 +1,49 @@
-# Sea Battle
-- [x] Pseudocode
-- [x] Marking Ships Functions
-- [x] Player Database
-- [x] Ships Random Generator
+# Todorite
 
-## Game Play:
-![alt text](https://github.com/jarnovs/sea_battle/blob/main/custom/sea_battle.png?raw=true)
+![Todorite Logo](custom/logo.png) <!-- Если есть логотип -->
 
-▢ - empty squares
-▧ - sunken ships
-▣ - hit ships
-◆ - missed shots
+## Backend Todorite
 
-## Score Board:
-![alt text](https://github.com/jarnovs/sea_battle/blob/main/custom/Scoreboard.png?raw=true)
+Backend написан на **Koa**, работает под управлением **PM2**.  
+
+## Технологии
+
+- **Backend:** Node.js, Koa, PM2
+- **Сервер:** Nginx
+- **SSL:** Let's Encrypt (для HTTPS)
+
+## Функциональность
+
+- Регистрация и аутентификация пользователей
+- Проверка токена
+- Поддержка REST API
+- Валидация по Joi
+- MVC разделение
+
+## Структура
+
+backend/
+├── src/
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   └── userController.js
+│   ├── middleware/
+│   │   ├── authChecker.js
+│   │   ├── errorHandler.js
+│   │   └── logger.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── chatRoutes.js
+│   │   ├── infoRoutes.js
+│   │   └── userRoutes.js
+│   ├── services/
+│   │   ├── authServices.js
+│   │   ├── chatServices.js
+│   │   ├── infoServices.js
+│   │   └── userServices.js
+│   ├── utils/
+│   │   ├── config.js
+│   │   └── knex.js
+├── index.js
+package.json
+package-lock.json
