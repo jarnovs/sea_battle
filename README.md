@@ -1,16 +1,12 @@
 # Todorite
-
-<img src="img/logo.jpg" width="300">
-
-![alt text](custom/authorization.jpg)
-
-![alt text](custom/chat.jpg)
+<img src="custom/chat.png" width=900>
 
 ## О проекте
 
 **Todorite** — Web Messenger.  
 Backend написан на **Koa**, работает под управлением **PM2**,  
 Frontend реализован с помощью **React** и **Vite**.
+
 
 ## Технологии
 
